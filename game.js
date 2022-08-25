@@ -1,5 +1,3 @@
-console.log("HELLO WORLD");
-
 function getComputerChoice() {
 
   let computerChoiseNumber;
