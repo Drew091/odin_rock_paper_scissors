@@ -22,16 +22,9 @@ function getComputerChoice() {
   return computerChoiseStr;
 }
 
-function getPlayerChoice() {
-
-  let playerChoiceStr = prompt("Rock Papper or Scissor?","");
-  playerChoiceStr = playerChoiceStr.charAt(0).toUpperCase() + playerChoiceStr.slice(1).toLowerCase();
-  console.log("Your Selection: " + playerChoiceStr);
-  return playerChoiceStr;
-}
-
-function playRound() {
-   const playerSelection = getPlayerChoice();
+function playRound(playerSelectionButton) {
+   const playerSelection = playerSelectionButton;
+   console.log("Your Selection: " + playerSelectionButton);
    const computerSelection = getComputerChoice();
    let computerRoundScore = 0;
    let playerRoundScore = 0;
@@ -57,6 +50,15 @@ function playRound() {
   return [playerRoundScore, computerRoundScore];
 }
 
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+  button.addEventListener('click', function (e){
+    playRound(e.target.value);
+  });
+});
+
+
+/* game function in comment
 function game() {
 
   let computerScore = 0;
@@ -79,3 +81,4 @@ function game() {
   }
 
 }
+*/
