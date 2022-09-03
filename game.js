@@ -50,12 +50,51 @@ function playRound(playerSelectionButton) {
   return [playerRoundScore, computerRoundScore];
 }
 
+let computerScore = 0;
+let playerScore = 0;
+
+const game = function(btn){
+  const container = document.querySelector('#Score');
+
+  const content = document.createElement('div');
+  content.classList.add('content');
+  content.setAttribute("id","cont");
+
+    let roundScore = playRound(btn.target.value);
+    playerScore = playerScore + roundScore[0];
+    computerScore = computerScore + roundScore[1];
+
+    if (playerScore == 5){
+      content.textContent = "YOU WON!\n"+"You: " + playerScore + " Computer: " + computerScore;
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach((button) => {
+      button.removeEventListener('click', game);
+      });
+    }else if (computerScore == 5){
+      content.textContent = "YOU LOST!\n"+"You: " + playerScore + " Computer: " + computerScore;
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach((button) => {
+      button.removeEventListener('click', game);
+      });
+    }else{
+      content.textContent = "You: " + playerScore + " Computer: " + computerScore;
+    }
+
+    const valami = document.getElementsByClassName('content');
+    if (valami.length > 0) {
+      const cont = document.querySelector('#cont')
+      cont.remove();
+    }
+
+    container.appendChild(content);
+}
+
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
-  button.addEventListener('click', function (e){
-    playRound(e.target.value);
-  });
+  button.addEventListener('click', game)
 });
+
+
 
 
 /* game function in comment
